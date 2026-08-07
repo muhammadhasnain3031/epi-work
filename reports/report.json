@@ -1,0 +1,69 @@
+{
+  "totalProcessed": 6,
+  "success": 6,
+  "failedLogin": 0,
+  "failedStep": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "srNo": 71,
+      "vaccinatorName": "Azhar Hussain",
+      "username": "7215_19726_OR",
+      "status": "CHECKIN_OK",
+      "step": "CHECKIN_DONE",
+      "errorMessage": "",
+      "timestamp": "2026-08-07 07:26:34",
+      "screenshot": ""
+    },
+    {
+      "srNo": 72,
+      "vaccinatorName": "Muhammad Islam",
+      "username": "14006_19727_OR",
+      "status": "CHECKIN_OK",
+      "step": "CHECKIN_DONE",
+      "errorMessage": "",
+      "timestamp": "2026-08-07 07:26:50",
+      "screenshot": ""
+    },
+    {
+      "srNo": 73,
+      "vaccinatorName": "Usama Ali",
+      "username": "14480_19727_OR",
+      "status": "CHECKIN_OK",
+      "step": "CHECKIN_DONE",
+      "errorMessage": "",
+      "timestamp": "2026-08-07 07:27:06",
+      "screenshot": ""
+    },
+    {
+      "srNo": 74,
+      "vaccinatorName": "Qurat-ul-Ain",
+      "username": "7153_19685_OR",
+      "status": "CHECKIN_OK",
+      "step": "CHECKIN_DONE",
+      "errorMessage": "",
+      "timestamp": "2026-08-07 07:27:22",
+      "screenshot": ""
+    },
+    {
+      "srNo": 75,
+      "vaccinatorName": "Muhammad Faseeh Ullah",
+      "username": "13724_19714_OR",
+      "status": "CHECKIN_OK",
+      "step": "CHECKIN_DONE",
+      "errorMessage": "",
+      "timestamp": "2026-08-07 07:27:38",
+      "screenshot": ""
+    },
+    {
+      "srNo": 76,
+      "vaccinatorName": "Abdul Wahab",
+      "username": "7194_19714_OR",
+      "status": "CHECKIN_OK",
+      "step": "CHECKIN_DONE",
+      "errorMessage": "",
+      "timestamp": "2026-08-07 07:27:54",
+      "screenshot": ""
+    }
+  ]
+}

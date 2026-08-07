@@ -1,0 +1,13 @@
+{
+  "devices": [
+    {
+      "id": "device_1",
+      "name": "Samsung Galaxy A50",
+      "udid": "R8VY2010Y8A",
+      "androidVersion": "16",
+      "addedAt": "2026-07-15T09:00:00Z",
+      "isActive": true
+    }
+  ],
+  "activeDeviceId": "device_1"
+}

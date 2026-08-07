@@ -1,0 +1,27 @@
+{
+  "name": "sargodha-appium-automation",
+  "version": "1.0.0",
+  "description": "Sargodha Vaccination Automation",
+  "scripts": {
+    "server": "node server.js",
+    "checkin": "ts-node src/main.ts --mode checkin",
+    "checkout": "ts-node src/main.ts --mode checkout",
+    "both": "ts-node src/main.ts --mode both",
+    "reset": "ts-node src/resetStatus.ts"
+  },
+  "dependencies": {
+    "@wdio/appium-service": "^8.36.0",
+    "dayjs": "^1.11.11",
+    "exceljs": "^4.4.0",
+    "express": "^4.22.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "webdriverio": "^8.36.0",
+    "winston": "^3.13.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

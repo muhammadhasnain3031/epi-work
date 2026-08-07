@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Health Portal - Automation Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pk-green: #1B6B3A;
+            --pk-green-dark: #124B27;
+            --pk-accent: #F4A500;
+            --bg-main: #F4F7F6;
+            --card-bg: #FFFFFF;
+            --text-main: #2D3748;
+            --text-muted: #718096;
+            --border-color: #E2E8F0;
+            --success-color: #2F855A;
+            --danger-color: #C53030;
+            --warning-color: #D69E2E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        aside {
+            width: 320px;
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: var(--pk-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--pk-green);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--pk-green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--pk-green-dark);
+        }
+
+        .btn-primary:disabled {
+            background-color: #A0AEC0;
+            cursor: not-allowed;
+        }
+
+        .devices-list {
+            margin-top: 24px;
+        }
+
+        .devices-list h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--pk-green);
+        }
+
+        .device-card {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .device-card .device-name {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .device-card .device-meta {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        /* Main Workspace Styling */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header.top-nav {
+            background: var(--card-bg);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--pk-green);
+        }
+
+        .nav-title p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .system-badge {
+            background-color: rgba(27, 107, 58, 0.1);
+            color: var(--pk-green);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(27, 107, 58, 0.2);
+        }
+
+        .dashboard-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Stats Grid & Progress Bar */
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .stat-card.total::before { background-color: var(--pk-green); }
+        .stat-card.success::before { background-color: var(--success-color); }
+        .stat-card.failed::before { background-color: var(--danger-color); }
+        .stat-card.skipped::before { background-color: var(--warning-color); }
+
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 6px;
+            color: var(--text-main);
+        }
+
+        .progress-wrapper {
+            background: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--pk-accent);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Action Control Panel */
+        .control-panel {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-check-in { background-color: var(--pk-green); color: white; }
+        .btn-check-in:hover:not(:disabled) { background-color: var(--pk-green-dark); }
+
+        .btn-check-out { background-color: #2B6CB0; color: white; }
+        .btn-check-out:hover:not(:disabled) { background-color: #2C5282; }
+
+        .btn-reset { background-color: #ED8936; color: white; }
+        .btn-reset:hover:not(:disabled) { background-color: #DD6B20; }
+
+        .btn-stop { background-color: var(--danger-color); color: white; }
+        .btn-stop:hover:not(:disabled) { background-color: #9B2C2C; }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .input-group input {
+            padding: 9px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 180px;
+        }
+
+        /* Bottom Grid: Live Logs & Results Table */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            min-height: 300px;
+        }
+
+        .panel-box {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 12px 16px;
+            background: #F8FAFC;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logs-container {
+            padding: 12px;
+            background: #1A202C;
+            color: #E2E8F0;
+            font-family: monospace;
+            font-size: 0.8rem;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .log-line {
+            line-height: 1.4;
+            word-break: break-all;
+        }
+
+        .log-success { color: #68D391; }
+        .log-failed { color: #FC8181; }
+        .log-warning { color: #F6E05E; }
+        .log-info { color: #63B3ED; }
+
+        .table-container {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 250px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #F8FAFC;
+            font-weight: 600;
+            color: var(--text-muted);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        tr:hover {
+            background-color: #F8FAFC;
+        }
+
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-success { background: rgba(47, 133, 90, 0.1); color: var(--success-color); }
+        .status-failed { background: rgba(197, 48, 48, 0.1); color: var(--danger-color); }
+        .status-skipped { background: rgba(214, 158, 46, 0.1); color: var(--warning-color); }
+    </style>
+</head>
+<body>
+
+    <!-- Left Sidebar: Device Manager -->
+    <aside>
+        <div class="sidebar-header">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <h2>Device Manager</h2>
+        </div>
+        <div class="sidebar-content">
+            <form id="deviceForm" onsubmit="saveDevice(event)">
+                <div class="form-group">
+                    <label for="deviceName">Device Name</label>
+                    <input type="text" id="deviceName" placeholder="e.g., Field Unit 01" required>
+                </div>
+                <div class="form-group">
+                    <label for="deviceUdid">UDID / Serial</label>
+                    <input type="text" id="deviceUdid" placeholder="e.g., R58M10XYZ..." required>
+                </div>
+                <div class="form-group">
+                    <label for="deviceAndroid">Android Version</label>
+                    <input type="text" id="deviceAndroid" placeholder="e.g., 14.0" required>
+                </div>
+                <button type="submit" class="btn-primary">Save Device</button>
+            </form>
+
+            <div class="devices-list">
+                <h3>Registered Devices</h3>
+                <div id="devicesContainer">
+                    <!-- Dynamic devices populated here -->
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Workspace -->
+    <main>
+        <header class="top-nav">
+            <div class="nav-title">
+                <h1>National Health System</h1>
+                <p>Automated Attendance & Check-In Control Dashboard</p>
+            </div>
+            <div class="system-badge">
+                System Active • PK-Secure
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <!-- Top: Stats Cards & Progress -->
+            <div class="stats-container">
+                <div class="stats-grid">
+                    <div class="stat-card total">
+                        <div class="label">Total Processed</div>
+                        <div class="value" id="statTotal">0</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="label">Success</div>
+                        <div class="value" id="statSuccess">0</div>
+                    </div>
+                    <div class="stat-card failed">
+                        <div class="label">Failed</div>
+                        <div class="value" id="statFailed">0</div>
+                    </div>
+                    <div class="stat-card skipped">
+                        <div class="label">Skipped</div>
+                        <div class="value" id="statSkipped">0</div>
+                    </div>
+                </div>
+
+                <div class="progress-wrapper">
+                    <div class="progress-label">
+                        <span>Automation Progress</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center: Action Control Panel -->
+            <div class="control-panel">
+                <div class="action-buttons">
+                    <button class="btn btn-check-in" id="btnCheckIn" onclick="triggerAction('check-in')">Start Check-In</button>
+                    <button class="btn btn-check-out" id="btnCheckOut" onclick="triggerAction('check-out')">Start Check-Out</button>
+                    <button class="btn btn-reset" id="btnReset" onclick="triggerAction('reset')">Reset Status</button>
+                    <button class="btn btn-stop" id="btnStop" onclick="triggerAction('stop')" disabled>Stop</button>
+                </div>
+                <div class="input-group">
+                    <label for="fromNumber">From Number</label>
+                    <input type="text" id="fromNumber" placeholder="+92 300 1234567">
+                </div>
+            </div>
+
+            <!-- Bottom Grid: Live Logs & Results Table -->
+            <div class="bottom-grid">
+                <!-- Live Logs Panel -->
+                <div class="panel-box">
+                    <div class="panel-header">
+                        <span>Live Execution Logs</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);" id="connectionStatus">Connecting...</span>
+                    </div>
+                    <div class="logs-container" id="logsContainer">
+                        <div class="log-line log-info">[System] Initializing live log stream...</div>
+                    </div>
+                </div>
+
+                <!-- Results Table Panel -->
+                <div class="panel-box">
+                    <div class="panel-header">
+                        <span>Report Results (report.json)</span>
+                        <button onclick="fetchReportData()" style="background: none; border: none; color: var(--pk-green); cursor: pointer; font-size: 0.8rem; font-weight: 600;">Refresh</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Device / ID</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let isRunning = false;
+        let devices = [];
+
+        // UI State management
+        function setRunningState(running) {
+            isRunning = running;
+            document.getElementById('btnCheckIn').disabled = running;
+            document.getElementById('btnCheckOut').disabled = running;
+            document.getElementById('btnReset').disabled = running;
+            document.getElementById('btnStop').disabled = !running;
+        }
+
+        // Action Triggers
+        async function triggerAction(action) {
+            const fromNumber = document.getElementById('fromNumber').value;
+            
+            if (action === 'stop') {
+                setRunningState(false);
+                appendLog('System process manually aborted.', 'warning');
+                try {
+                    await fetch('/api/stop', { method: 'POST' });
+                } catch (e) { console.error(e); }
+                return;
+            }
+
+            setRunningState(true);
+            appendLog(`Initiating action: ${action.toUpperCase()} with number: ${fromNumber || 'Default'}`, 'info');
+
+            try {
+                const response = await fetch(`/api/${action}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fromNumber })
+                });
+                if (!response.ok) throw new Error('Network response was not ok');
+            } catch (error) {
+                appendLog(`Failed to execute ${action}: ${error.message}`, 'failed');
+                setRunningState(false);
+            }
+        }
+
+        // Append log line with color coding
+        function appendLog(message, type = 'info') {
+            const container = document.getElementById('logsContainer');
+            const line = document.createElement('div');
+            line.className = `log-line log-${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            line.textContent = `[${timestamp}] ${message}`;
+            container.appendChild(line);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Save Device Handler
+        function saveDevice(event) {
+            event.preventDefault();
+            const name = document.getElementById('deviceName').value;
+            const udid = document.getElementById('deviceUdid').value;
+            const android = document.getElementById('deviceAndroid').value;
+
+            const newDevice = { name, udid, android };
+            devices.push(newDevice);
+            renderDevices();
+            
+            // Clear inputs
+            document.getElementById('deviceForm').reset();
+            appendLog(`Device registered: ${name} (${udid})`, 'success');
+        }
+
+        function renderDevices() {
+            const container = document.getElementById('devicesContainer');
+            container.innerHTML = devices.map(d => `
+                <div class="device-card">
+                    <div class="device-name">${d.name}</div>
+                    <div class="device-meta">UDID: ${d.udid}</div>
+                    <div class="device-meta">Android v${d.android}</div>
+                </div>
+            `).join('');
+        }
+
+        // Fetch Stats (Auto-refresh every 5 seconds)
+        async function fetchStats() {
+            try {
+                const response = await fetch('/api/stats');
+                if (!response.ok) return;
+                const data = await response.json();
+                
+                document.getElementById('statTotal').textContent = data.total || 0;
+                document.getElementById('statSuccess').textContent = data.success || 0;
+                document.getElementById('statFailed').textContent = data.failed || 0;
+                document.getElementById('statSkipped').textContent = data.skipped || 0;
+
+                const percent = data.total > 0 ? Math.round(((data.success + data.failed + data.skipped) / data.total) * 100) : 0;
+                document.getElementById('progressBar').style.width = `${percent}%`;
+                document.getElementById('progressPercent').textContent = `${percent}%`;
+            } catch (error) {
+                // Silently handle polling errors during development or offline mock state
+            }
+        }
+
+        // Fetch Report Data from report.json
+        async function fetchReportData() {
+            try {
+                const response = await fetch('/report.json');
+                if (!response.ok) return;
+                const reports = await response.json();
+                
+                const tbody = document.getElementById('reportTableBody');
+                tbody.innerHTML = reports.map(r => `
+                    <tr>
+                        <td>${r.device || r.id || 'N/A'}</td>
+                        <td>${r.number || r.phone || 'N/A'}</td>
+                        <td><span class="status-badge status-${(r.status || 'skipped').toLowerCase()}">${r.status || 'Skipped'}</span></td>
+                        <td>${r.timestamp || new Date().toLocaleTimeString()}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                // Handle missing report.json gracefully
+            }
+        }
+
+        // SSE Connection for Real-Time Logs
+        function initSSE() {
+            const statusEl = document.getElementById('connectionStatus');
+            const eventSource = new EventSource('/api/logs');
+
+            eventSource.onopen = () => {
+                statusEl.textContent = 'Live Connected';
+                statusEl.style.color = 'var(--success-color)';
+            };
+
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    appendLog(data.message, data.type || 'info');
+                } catch (e) {
+                    appendLog(event.data, 'info');
+                }
+            };
+
+            eventSource.onerror = () => {
+                statusEl.textContent = 'Reconnecting...';
+                statusEl.style.color = 'var(--warning-color)';
+            };
+        }
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            initSSE();
+            fetchStats();
+            fetchReportData();
+            setInterval(fetchStats, 5000);
+        });
+    </script>
+</body>
+</html>
