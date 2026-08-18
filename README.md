@@ -190,3 +190,13 @@ ts-node src/main.ts --from 25
 
 ### Slow performance
 → `TIMEOUTS.elementWait` badha do (e.g., 15000).
+
+
+### appium server starter
+appium --port 4723 --use-drivers uiautomator2 --allow-cors
+
+### Check-in & check-out command
+npm run checkin --- npm run checkout
+
+### users status reset command
+npm run reset
