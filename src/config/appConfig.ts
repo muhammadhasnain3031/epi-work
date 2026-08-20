@@ -32,8 +32,8 @@ export const CAPABILITIES = {
   'appium:autoGrantPermissions': true,
   'appium:ignoreHiddenApiPolicyError': true,
   // @ fix ke liye — keyboard disable
-  'appium:unicodeKeyboard': false,
-  'appium:resetKeyboard': false,
+  'appium:unicodeKeyboard': true,
+  'appium:resetKeyboard': true,
 };
 
 export const LOCATORS = {

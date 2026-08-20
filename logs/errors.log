@@ -375,3 +375,52 @@ It seems like the service failed to start or is rejecting any connections.
 [2026-08-18 07:13:22] ERROR   | Excel update fail row 10: EBUSY: resource busy or locked, open 'C:\Users\Asif Computer\OneDrive\Documents\My-Personal-Document\sargodha-appium - Copy\data\users.xlsx'
 [2026-08-18 07:13:40] ERROR   | Excel update fail row 11: EBUSY: resource busy or locked, open 'C:\Users\Asif Computer\OneDrive\Documents\My-Personal-Document\sargodha-appium - Copy\data\users.xlsx'
 [2026-08-18 07:13:59] ERROR   | Excel update fail row 12: EBUSY: resource busy or locked, open 'C:\Users\Asif Computer\OneDrive\Documents\My-Personal-Document\sargodha-appium - Copy\data\users.xlsx'
+[2026-08-18 13:28:10] ERROR   | [11]    Error: Login timeout
+[2026-08-18 13:37:44] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:37:50] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:37:52] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-18 13:37:57] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:37:57] ERROR   | [41]    Error: Login timeout
+[2026-08-18 13:38:03] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:05] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-18 13:38:10] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:10] ERROR   | [42]    Error: Login timeout
+[2026-08-18 13:38:16] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:18] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-18 13:38:23] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:23] ERROR   | [43]    Error: Login timeout
+[2026-08-18 13:38:29] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:31] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-18 13:38:36] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:36] ERROR   | [44]    Error: Login timeout
+[2026-08-18 13:38:42] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-18 13:38:44] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-18 13:38:55] ERROR   | [45]    Error: Login timeout
+[2026-08-18 13:39:07] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-20 13:32:05] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-20 13:32:11] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-20 13:32:11] ERROR   | [1]    Error: Login timeout
+[2026-08-20 13:32:17] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-20 13:32:19] ERROR   |   ✗ Login: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+[2026-08-20 13:32:25] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-20 13:32:25] ERROR   | [2]    Error: Login timeout
+[2026-08-20 13:32:30] ERROR   |   ✗ Reset: Error executing adbExec. Original error: 'Command ''C:\Users\Asif Computer\AppData\Local\Android\Sdk\platform-tools\adb.exe' -P 5037 -s R8VY2010Y8A shell dumpsys activity processes' exited with code 1'; Command output: adb.exe: device 'R8VY2010Y8A' not found
+
+[2026-08-20 13:43:10] ERROR   | [27]    Error: Login timeout
+[2026-08-20 13:43:33] ERROR   |   ✗ Login: element ("android=new UiSelector().resourceId("com.hisdu.emr.application:id/mEmailView")") still not existing after 500ms
+[2026-08-20 13:43:45] ERROR   | [28]    Error: Login timeout
+[2026-08-20 13:46:35] ERROR   | [36]    Error: Login timeout
+[2026-08-20 13:50:05] ERROR   | [39]    Error: Login timeout
